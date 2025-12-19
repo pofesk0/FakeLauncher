@@ -9,3 +9,7 @@ This is an app for launching a fake home screen after an incorrect lock screen p
 You can use this app when someone is trying to duress you into showing the contents of your phone. In this situation you just enter the wrong password and app show a decoy.
 
 Required Device Admin permission to watch for password failed attempts.
+
+Это (/FakeLauncher) репозиторий для отладки. Если вам нужен репозиторий для сборки кода с CLI и более высокой target sdk - это /lastcodefakelauncher.
+
+This (/FakeLauncher) is a repository for debugging. If you need a repository for building code with CLI and a higher target SDK, this is /lastcodefakelauncher.
