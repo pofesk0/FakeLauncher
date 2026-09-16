@@ -44,7 +44,7 @@ public class LauncherActivity extends Activity {
 		TextView messageView = dialog.findViewById(android.R.id.message);
 		if (messageView != null) {
 			messageView.setGravity(Gravity.CENTER);
-			messageView.setTypeface(Typeface.DEFAULT_BOLD); // Жирный шрифт
+			messageView.setTypeface(Typeface.DEFAULT_BOLD);
 		}
 
 		Button negativeButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
