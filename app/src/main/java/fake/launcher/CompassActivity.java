@@ -297,52 +297,45 @@ public class CompassActivity extends Activity implements SensorEventListener {
         }
 
         private void initPaints() {
-            // Фон
+            
             backgroundPaint = new Paint();
             backgroundPaint.setColor(Color.rgb(15, 20, 40));
             backgroundPaint.setStyle(Paint.Style.FILL);
             backgroundPaint.setAntiAlias(true);
-
-            // Краска для теней
+            
             shadowPaint = new Paint();
             shadowPaint.setColor(Color.argb(150, 0, 0, 0));
             shadowPaint.setStyle(Paint.Style.FILL);
             shadowPaint.setAntiAlias(true);
-
-            // Краска для обводки стрелок
+            
             borderPaint = new Paint();
             borderPaint.setColor(Color.WHITE);
             borderPaint.setStyle(Paint.Style.STROKE);
             borderPaint.setStrokeWidth(3);
             borderPaint.setAntiAlias(true);
 
-            // Основной текст (внутри стрелок)
             mainTextPaint = new Paint();
             mainTextPaint.setColor(Color.WHITE);
             mainTextPaint.setTextSize(48);
             mainTextPaint.setTextAlign(Align.CENTER);
             mainTextPaint.setAntiAlias(true);
             mainTextPaint.setFakeBoldText(true);
-
-            // Второстепенный текст
+            
             Paint subTextPaint = new Paint();
             subTextPaint.setColor(Color.WHITE);
             subTextPaint.setTextSize(36);
             subTextPaint.setTextAlign(Align.CENTER);
             subTextPaint.setAntiAlias(true);
-
-            // Деления
+            
             tickPaint = new Paint();
             tickPaint.setColor(Color.WHITE);
             tickPaint.setAntiAlias(true);
 
-            // Центральная точка
             centerPaint = new Paint();
             centerPaint.setColor(Color.BLACK);
             centerPaint.setStyle(Paint.Style.FILL);
             centerPaint.setAntiAlias(true);
 
-            // Информационный текст
             infoPaint = new Paint();
             infoPaint.setColor(Color.CYAN);
             infoPaint.setTextSize(40);
@@ -365,8 +358,7 @@ public class CompassActivity extends Activity implements SensorEventListener {
             int centerX = width / 2;
             int centerY = height / 2;
             int radius = Math.min(centerX, centerY) - 40;
-
-            // Фон
+            
             canvas.drawColor(Color.BLACK);
             canvas.drawCircle(centerX, centerY, radius + 10, backgroundPaint);
 
@@ -374,24 +366,18 @@ public class CompassActivity extends Activity implements SensorEventListener {
             canvas.save();
             canvas.rotate(-currentAzimuth, centerX, centerY);
 
-            // Рисуем деления
             drawTicks(canvas, centerX, centerY, radius);
 
-            // Рисуем объемные стрелки розы ветров
             drawVolumetricWindRose(canvas, centerX, centerY, radius);
 
-            // Восстанавливаем canvas
             canvas.restore();
 
-            // Рисуем центральную точку
             drawCenterPoint(canvas, centerX, centerY);
 
-            // Рисуем текущее направление
             drawCurrentDirection(canvas, centerX, centerY, radius);
         }
 
         private void drawTicks(Canvas canvas, int centerX, int centerY, int radius) {
-            // Основные деления (каждые 30 градусов)
             for (int i = 0; i < 360; i += 30) {
                 double rad = Math.toRadians(i);
                 float x1 = centerX + (float) Math.sin(rad) * (radius - 10);
@@ -404,11 +390,10 @@ public class CompassActivity extends Activity implements SensorEventListener {
                 canvas.drawLine(x1, y1, x2, y2, tickPaint);
             }
 
-            // Цифры градусов (каждые 30 градусов)
             tickPaint.setTextSize(28);
             tickPaint.setTextAlign(Align.CENTER);
             for (int i = 0; i < 360; i += 30) {
-                if (i == 0) continue; // 0 градусов не рисуем
+                if (i == 0) continue;
                 double rad = Math.toRadians(i);
                 float x = centerX + (float) Math.sin(rad) * (radius - 45);
                 float y = centerY - (float) Math.cos(rad) * (radius - 45) + 10;
@@ -419,22 +404,20 @@ public class CompassActivity extends Activity implements SensorEventListener {
         private void drawVolumetricWindRose(Canvas canvas, int centerX, int centerY, int radius) {
             int arrowLength = radius - 30;
             int arrowWidth = 60;
-            int arrowDepth = 40; // Глубина объемности
+            int arrowDepth = 40;
 
             // Основные направления
             float[] mainAngles = {0, 90, 180, 270};
             int[] mainColors = {
-                Color.rgb(220, 60, 60),    // Красный для севера
-                Color.rgb(60, 220, 60),    // Зеленый для востока
-                Color.rgb(160, 60, 220),   // Синий для юга
-                Color.rgb(220, 220, 60)    // Желтый для запада
+                Color.rgb(220, 60, 60),
+                Color.rgb(60, 220, 60),
+                Color.rgb(160, 60, 220),
+                Color.rgb(220, 220, 60)
             };
 
-            // Промежуточные направления
             float[] subAngles = {45, 135, 225, 315};
-            int subColor = Color.rgb(180, 140, 60); // Золотистый
+            int subColor = Color.rgb(180, 140, 60);
 
-            // Рисуем стрелки (начиная с промежуточных, чтобы основные были сверху)
             for (int i = 0; i < subAngles.length; i++) {
                 drawVolumetricArrow(canvas, centerX, centerY, subAngles[i], 
 									arrowLength, arrowWidth - 10, arrowDepth - 10, subColor, 
@@ -453,17 +436,14 @@ public class CompassActivity extends Activity implements SensorEventListener {
 										 int depth, int color, String text, float textSize) {
             double rad = Math.toRadians(angle);
 
-            // Координаты кончика стрелки
             float tipX = centerX + (float) Math.sin(rad) * length;
             float tipY = centerY - (float) Math.cos(rad) * length;
 
-            // Координаты основания стрелки
             float baseX1 = centerX + (float) Math.sin(rad + Math.PI/2) * width/2;
             float baseY1 = centerY - (float) Math.cos(rad + Math.PI/2) * width/2;
             float baseX2 = centerX + (float) Math.sin(rad - Math.PI/2) * width/2;
             float baseY2 = centerY - (float) Math.cos(rad - Math.PI/2) * width/2;
 
-            // Координаты для объемности (задняя часть стрелки)
             float backTipX = tipX - (float) Math.sin(rad) * depth;
             float backTipY = tipY + (float) Math.cos(rad) * depth;
             float backBaseX1 = baseX1 - (float) Math.sin(rad) * depth;
@@ -471,7 +451,6 @@ public class CompassActivity extends Activity implements SensorEventListener {
             float backBaseX2 = baseX2 - (float) Math.sin(rad) * depth;
             float backBaseY2 = baseY2 + (float) Math.cos(rad) * depth;
 
-            // Создаем градиент для объемного эффекта
             LinearGradient gradient = new LinearGradient(
                 tipX, tipY, backTipX, backTipY,
                 color, Color.rgb(
@@ -486,14 +465,12 @@ public class CompassActivity extends Activity implements SensorEventListener {
             arrowPaint.setShader(gradient);
             arrowPaint.setAntiAlias(true);
 
-            // Рисуем заднюю грань
             Path backFace = new Path();
             backFace.moveTo(backTipX, backTipY);
             backFace.lineTo(backBaseX1, backBaseY1);
             backFace.lineTo(backBaseX2, backBaseY2);
             backFace.close();
 
-            // Более темный цвет для задней грани
             Paint backPaint = new Paint();
             backPaint.setColor(Color.rgb(
 								   Math.max(0, Color.red(color) - 100),
@@ -504,7 +481,6 @@ public class CompassActivity extends Activity implements SensorEventListener {
 
             canvas.drawPath(backFace, backPaint);
 
-            // Рисуем боковые грани
             Path sideFace1 = new Path();
             sideFace1.moveTo(tipX, tipY);
             sideFace1.lineTo(backTipX, backTipY);
@@ -530,7 +506,6 @@ public class CompassActivity extends Activity implements SensorEventListener {
             canvas.drawPath(sideFace1, sidePaint);
             canvas.drawPath(sideFace2, sidePaint);
 
-            // Рисуем переднюю грань (основная стрелка)
             Path frontFace = new Path();
             frontFace.moveTo(tipX, tipY);
             frontFace.lineTo(baseX1, baseY1);
@@ -539,14 +514,11 @@ public class CompassActivity extends Activity implements SensorEventListener {
 
             canvas.drawPath(frontFace, arrowPaint);
 
-            // Обводка стрелки
             canvas.drawPath(frontFace, borderPaint);
 
-            // Рисуем текст внутри стрелки
             float textX = tipX - (float) Math.sin(rad) * (depth/2 + length/3);
             float textY = tipY + (float) Math.cos(rad) * (depth/2 + length/3);
 
-            // Поворачиваем текст в соответствии с направлением
             canvas.save();
             canvas.rotate(angle, textX, textY);
             if (angle > 90 && angle < 270) {
@@ -555,8 +527,7 @@ public class CompassActivity extends Activity implements SensorEventListener {
 
             mainTextPaint.setTextSize(textSize);
             mainTextPaint.setColor(Color.WHITE);
-
-            // Добавляем тень тексту
+            
             Paint textShadowPaint = new Paint();
             textShadowPaint.set(mainTextPaint);
             textShadowPaint.setColor(Color.BLACK);
@@ -569,16 +540,13 @@ public class CompassActivity extends Activity implements SensorEventListener {
             canvas.restore();
         }
 
-        private void drawCenterPoint(Canvas canvas, int centerX, int centerY) {
-            // Внешний круг
+        private void drawCenterPoint(Canvas canvas, int centerX, int centerY) {            
             centerPaint.setColor(Color.rgb(60, 60, 80));
             canvas.drawCircle(centerX, centerY, 25, centerPaint);
 
-            // Средний круг
             centerPaint.setColor(Color.BLACK);
             canvas.drawCircle(centerX, centerY, 20, centerPaint);
-
-            // Внутренний круг с градиентом
+            
             Paint gradientPaint = new Paint();
             RadialGradient radialGradient = new RadialGradient(
                 centerX, centerY, 15,
@@ -587,12 +555,10 @@ public class CompassActivity extends Activity implements SensorEventListener {
             );
             gradientPaint.setShader(radialGradient);
             canvas.drawCircle(centerX, centerY, 15, gradientPaint);
-
-            // Центральная точка
+            
             centerPaint.setColor(Color.WHITE);
             canvas.drawCircle(centerX, centerY, 6, centerPaint);
-
-            // Крест в центре
+            
             Paint crossPaint = new Paint();
             crossPaint.setColor(Color.RED);
             crossPaint.setStrokeWidth(4);
@@ -602,8 +568,7 @@ public class CompassActivity extends Activity implements SensorEventListener {
             canvas.drawLine(centerX, centerY - 12, centerX, centerY + 12, crossPaint);
         }
 
-        private void drawCurrentDirection(Canvas canvas, int centerX, int centerY, int radius) {
-            // Фон для информации
+        private void drawCurrentDirection(Canvas canvas, int centerX, int centerY, int radius) {            
             Paint bgPaint = new Paint();
             bgPaint.setColor(Color.argb(200, 30, 35, 60));
             bgPaint.setStyle(Paint.Style.FILL);
@@ -611,7 +576,6 @@ public class CompassActivity extends Activity implements SensorEventListener {
 									   centerX + 200, centerY + radius + 60);
             canvas.drawRoundRect(infoRect, 20, 20, bgPaint);
 
-            // Рамка с градиентом
             Paint framePaint = new Paint();
             framePaint.setStyle(Paint.Style.STROKE);
             framePaint.setStrokeWidth(5);
@@ -622,14 +586,12 @@ public class CompassActivity extends Activity implements SensorEventListener {
             framePaint.setShader(frameGradient);
             canvas.drawRoundRect(infoRect, 20, 20, framePaint);
 
-            // Текущее направление
             String directionName = getDirectionName(currentAzimuth);
             String info = String.format("%.0f° %s", currentAzimuth, directionName);
 
             infoPaint.setColor(Color.WHITE);
             infoPaint.setTextSize(46);
 
-            // Тень текста
             Paint textShadow = new Paint();
             textShadow.set(infoPaint);
             textShadow.setColor(Color.BLACK);
@@ -639,7 +601,6 @@ public class CompassActivity extends Activity implements SensorEventListener {
             canvas.drawText(info, centerX, centerY + radius + 15, textShadow);
             canvas.drawText(info, centerX, centerY + radius + 15, infoPaint);
 
-            // Магнитный север
             infoPaint.setTextSize(32);
             infoPaint.setColor(Color.YELLOW);
             canvas.drawText(magneticNorthText, centerX, centerY + radius - 80, infoPaint);
@@ -668,7 +629,6 @@ public class CompassActivity extends Activity implements SensorEventListener {
         }
     }
 
-    // Внутренний класс для радиального градиента (так как RadialGradient может быть не в API 6)
     static class RadialGradient extends Shader {
         private int centerColor;
         private int edgeColor;
