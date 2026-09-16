@@ -82,8 +82,8 @@ public class LauncherActivity extends Activity {
             );
 
             String explanation = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage())
-                ? "Это приложение для запуска фейкового главного экрана при вводе неверного пароля на экране блокировки, чтобы злоумышленник думал, что это и есть ваши данные (но там их нет).\nВы можете использовать это приложение когда вас заставляют показать содержимое телефона. В таком случае просто вводите неправильный пароль (4 или более символов) и приложение покажет 'пустышку'.\nРазрешение администратора требуется для отслеживания неверных попыток ввода пароля."
-                : "This is an app for launching a fake home screen after an incorrect lock screen password is entered, so an attacker thinks this is your real data (but there are none).\nYou can use this app when someone is trying to duress you into showing the contents of your phone. In this situation you just enter the wrong password (4 or more characters) and app show a 'decoy'.\nDevice Administrator permission is required to track incorrect password entry attempts.";
+                ? "Это приложение для запуска фейкового главного экрана при вводе неверного пароля на экране блокировки: вы просто вводите неправильный пароль (от 4х символов) и приложение покажет 'пустышку'.\nТребуется разрешение администратора для отслеживания неверных попыток ввода пароля."
+                : "This is an app for launching a fake home screen after an incorrect lock screen password entry: you just enter the wrong password (4 or more characters) and app show a 'decoy'.\nRequired Device Administrator permission to track incorrect password entry attempts.";
 
             intent.putExtra(
 				DevicePolicyManager.EXTRA_ADD_EXPLANATION,
