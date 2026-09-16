@@ -4,7 +4,7 @@
 
 Внимание! Это может не работать на некоторых прошивках. Проверяйте это на вашем устройстве.
 
-This is an app for launching a fake home screen after an incorrect lock screen password entry: you just enter the wrong password (from 4 characters) and app will show a decoy.
+This is an app for launching a fake home screen after an incorrect lock screen password entry: you just enter the wrong password (from 4 characters) and app will show a 'decoy'.
 
 To watch for password failed attempts apps uses Device Admin permission.
 
