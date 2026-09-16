@@ -1,15 +1,11 @@
-Это приложение для запуска фейкового главного экрана при вводе неверного пароля на экране блокировки, чтобы посторонний думал, что это и есть ваши данные (но там их нет).
+Это приложение для запуска фейкового главного экрана при вводе неверного пароля на экране блокировки: вы просто вводите неправильный пароль (от 4х символов) и приложение покажет 'пустышку'.
 
-Вы можете использовать это приложение когда вас заставляют показать содержимое телефона. В таком случае просто вводите неправильный пароль и приложение покажет 'пустышку'.
-
-Требуется разрешение Device Admin для отслежвания неверных попыток ввода пароля.
+Для отслежвания неверных попыток ввода пароля используется разрешение Device Admin.
 
 Внимание! Это может не работать на некоторых прошивках. Проверяйте это на вашем устройстве.
 
-This is an app for launching a fake home screen after an incorrect lock screen password is entered, so an outsider thinks this is your real data (but there are none).
+This is an app for launching a fake home screen after an incorrect lock screen password is entered: you just enter the wrong password (from 4 characters) and app will show a decoy.
 
-You can use this app when someone is trying to duress you into showing the contents of your phone. In this situation you just enter the wrong password and app show a decoy.
-
-Required Device Admin permission to watch for password failed attempts.
+To watch for password failed attempts apps uses Device Admin permission.
 
 Attention! It may not work on some OEMs. Check it on your device.
